@@ -19,7 +19,7 @@ namespace SIMEXPRO.DataAccess.Repositories.Gral
             var parametros = new DynamicParameters();
             parametros.Add("@empl_Id", item.empl_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@usua_UsuarioEliminacion", item.usua_UsuarioEliminacion, DbType.Int32, ParameterDirection.Input);
-            parametros.Add("@empl_FechaEliminacion", item.empl_FechaEliminacion, DbType.String, ParameterDirection.Input);
+            parametros.Add("@empl_FechaEliminacion", item.empl_FechaEliminacion, DbType.DateTime, ParameterDirection.Input);
             var answer = db.QueryFirst<string>(ScriptsDataBase.EliminarEmpleados, parametros, commandType: CommandType.StoredProcedure);
             result.MessageStatus = answer;
             return result;
@@ -48,7 +48,7 @@ namespace SIMEXPRO.DataAccess.Repositories.Gral
             parametros.Add("@empl_CorreoElectronico", item.empl_CorreoElectronico, DbType.String, ParameterDirection.Input);
             parametros.Add("@empl_EsAduana", item.empl_EsAduana, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@usua_UsuarioCreacion", item.usua_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
-            parametros.Add("@empl_FechaCreacion", item.empl_FechaCreacion, DbType.String, ParameterDirection.Input);
+            parametros.Add("@empl_FechaCreacion", item.empl_FechaCreacion, DbType.DateTime, ParameterDirection.Input);
             var answer = db.QueryFirst<string>(ScriptsDataBase.InsertarEmpleados, parametros, commandType: CommandType.StoredProcedure);
             result.MessageStatus = answer;
             return result;
@@ -83,7 +83,6 @@ namespace SIMEXPRO.DataAccess.Repositories.Gral
 
         public RequestStatus Update(tbEmpleados item)
         {
-
             using var db = new SqlConnection(SIMEXPRO.ConnectionString);
             RequestStatus result = new RequestStatus();
             var parametros = new DynamicParameters();
@@ -106,7 +105,6 @@ namespace SIMEXPRO.DataAccess.Repositories.Gral
             result.MessageStatus = answer;
             return result;
         }
-
 
         public RequestStatus Reactivar(tbEmpleados item)
         {
