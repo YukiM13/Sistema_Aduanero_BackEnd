@@ -31,7 +31,7 @@ namespace SIMEXPRO.DataAccess.Repositories.Gral
             parametros.Add("@carg_Nombre", item.carg_Nombre, DbType.String, ParameterDirection.Input);
             parametros.Add("@carg_Aduana", item.carg_Aduana, DbType.Boolean, ParameterDirection.Input);
             parametros.Add("@usua_UsuarioCreacion", item.usua_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
-            parametros.Add("@carg_FechaCreacion", item.carg_FechaCreacion, DbType.String, ParameterDirection.Input);
+            parametros.Add("@carg_FechaCreacion", item.carg_FechaCreacion, DbType.DateTime, ParameterDirection.Input);
 
             var answer = db.QueryFirst<string>(ScriptsDataBase.InsertarCargos, parametros, commandType: CommandType.StoredProcedure);
             result.MessageStatus = answer;
@@ -65,7 +65,7 @@ namespace SIMEXPRO.DataAccess.Repositories.Gral
             parametros.Add("@carg_Id", item.carg_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@carg_Nombre", item.carg_Nombre, DbType.String, ParameterDirection.Input);
             parametros.Add("@usua_UsuarioModificacion", item.usua_UsuarioModificacion, DbType.Int32, ParameterDirection.Input);
-            parametros.Add("@carg_FechaModificacion", item.carg_FechaModificacion, DbType.String, ParameterDirection.Input);
+            parametros.Add("@carg_FechaModificacion", item.carg_FechaModificacion, DbType.DateTime, ParameterDirection.Input);
 
             var answer = db.QueryFirst<string>(ScriptsDataBase.EditarCargos, parametros, commandType: CommandType.StoredProcedure);
             result.MessageStatus = answer;

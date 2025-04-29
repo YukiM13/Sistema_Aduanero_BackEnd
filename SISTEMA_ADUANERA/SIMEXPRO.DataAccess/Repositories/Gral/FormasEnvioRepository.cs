@@ -38,7 +38,7 @@ namespace SIMEXPRO.DataAccess.Repositories.Gral
             parametros.Add("@foen_Codigo", item.foen_Codigo, DbType.String, ParameterDirection.Input);
             parametros.Add("@foen_Descripcion", item.foen_Descripcion, DbType.String, ParameterDirection.Input);
             parametros.Add("@usua_UsuarioCreacion", item.usua_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
-            parametros.Add("@foen_FechaCreacion", item.foen_FechaCreacion, DbType.String, ParameterDirection.Input);
+            parametros.Add("@foen_FechaCreacion", item.foen_FechaCreacion, DbType.DateTime, ParameterDirection.Input);
             var answer = db.QueryFirst<string>(ScriptsDataBase.InsertarFormasEnvio, parametros, commandType: CommandType.StoredProcedure);
             result.MessageStatus= answer;
             return result;
@@ -60,7 +60,7 @@ namespace SIMEXPRO.DataAccess.Repositories.Gral
             parametros.Add("@foen_Codigo", item.foen_Codigo, DbType.String, ParameterDirection.Input);
             parametros.Add("@foen_Descripcion", item.foen_Descripcion, DbType.String, ParameterDirection.Input);
             parametros.Add("@usua_UsuarioModificacion", item.usua_UsuarioModificacion, DbType.Int32, ParameterDirection.Input);
-            parametros.Add("@foen_FechaModificacion", item.foen_FechaModificacion, DbType.String, ParameterDirection.Input);
+            parametros.Add("@foen_FechaModificacion", item.foen_FechaModificacion, DbType.DateTime, ParameterDirection.Input);
             var answer = db.QueryFirst<string>(ScriptsDataBase.EditarFormasEnvio, parametros, commandType: CommandType.StoredProcedure);
             result.MessageStatus = answer;
             return result;
