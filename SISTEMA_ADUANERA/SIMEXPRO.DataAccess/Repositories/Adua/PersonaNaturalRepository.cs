@@ -82,10 +82,10 @@ namespace SIMEXPRO.DataAccess.Repositories.Adua
             parametros.Add("@pena_NombreArchRecibo", item.pena_NombreArchRecibo, DbType.String, ParameterDirection.Input);
             parametros.Add("@pena_NombreArchDNI", item.pena_NombreArchDNI, DbType.String, ParameterDirection.Input);
             parametros.Add("@usua_UsuarioModificacion", item.usua_UsuarioModificacion, DbType.Int32, ParameterDirection.Input);
-            parametros.Add("@pena_FechaModificacion", item.pena_FechaModificacion, DbType.String, ParameterDirection.Input);
+            parametros.Add("@pena_FechaModificacion", item.pena_FechaModificacion, DbType.DateTime, ParameterDirection.Input);
 
             var answer = db.QueryFirst<string>(ScriptsDataBase.EditarPersonaNatural, parametros, commandType: CommandType.StoredProcedure);
-            result.MessageStatus = answer;
+            result.MessageStatus = answer;  
             return result;
         }
         public RequestStatus Finalizar(tbPersonaNatural item)

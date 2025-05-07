@@ -34,10 +34,21 @@ namespace SIMEXPRO.API.Controllers.ControllersAduanas
 
 
         [HttpPost("Insertar")]
-        public IActionResult Insert(PersonaNaturalViewModel personaNaturalViewModel)
+        public async Task<IActionResult> Insert([FromForm] PersonaNaturalViewModel personaNaturalViewModel)
         {
+            if (personaNaturalViewModel.ArchivoRTN == null || personaNaturalViewModel.ArchivoRTN.Length == 0)
+                return BadRequest("Archivo no válido.");
+
+            // Subir archivo a Google Cloud Storage
+            using var stream = personaNaturalViewModel.ArchivoRTN.OpenReadStream();
+            var storageService = new GoogleCloudStorageService();
+            var fileUrl = await storageService.SubirArchivoAsync(stream, personaNaturalViewModel.ArchivoRTN.FileName, personaNaturalViewModel.ArchivoRTN.ContentType);
+
+            // Guardar el URL del archivo en la base de datos
             var item = _mapper.Map<tbPersonaNatural>(personaNaturalViewModel);
+            item.pena_ArchivoRTN = fileUrl; // Se guarda la URL en el modelo
             var respuesta = _aduanaServices.InsertarPersonaNatural(item);
+
             return Ok(respuesta);
         }
 
