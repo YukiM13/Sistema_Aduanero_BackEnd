@@ -19,7 +19,7 @@ namespace SIMEXPRO.DataAccess.Repositories.Gral
             var parametros = new DynamicParameters();
             parametros.Add("@foen_Id", item.foen_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@usua_UsuarioEliminacion", item.usua_UsuarioEliminacion, DbType.Int32, ParameterDirection.Input);
-            parametros.Add("@foen_FechaEliminacion", item.foen_FechaEliminacion, DbType.String, ParameterDirection.Input);
+            parametros.Add("@foen_FechaEliminacion", item.foen_FechaEliminacion, DbType.DateTime, ParameterDirection.Input);
             var answer = db.QueryFirst<string>(ScriptsDataBase.EliminarFormasEnvio, parametros, commandType: CommandType.StoredProcedure);
             result.MessageStatus = answer;
             return result;
@@ -40,7 +40,7 @@ namespace SIMEXPRO.DataAccess.Repositories.Gral
             parametros.Add("@usua_UsuarioCreacion", item.usua_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@foen_FechaCreacion", item.foen_FechaCreacion, DbType.DateTime, ParameterDirection.Input);
             var answer = db.QueryFirst<string>(ScriptsDataBase.InsertarFormasEnvio, parametros, commandType: CommandType.StoredProcedure);
-            result.MessageStatus= answer;
+            result.MessageStatus = answer;
             return result;
         }
 
@@ -65,8 +65,5 @@ namespace SIMEXPRO.DataAccess.Repositories.Gral
             result.MessageStatus = answer;
             return result;
         }
-
-
-
     }
 }
