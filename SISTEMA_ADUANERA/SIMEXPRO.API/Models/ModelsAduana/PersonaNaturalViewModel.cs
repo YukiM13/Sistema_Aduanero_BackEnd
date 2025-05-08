@@ -8,7 +8,7 @@ namespace SIMEXPRO.API.Models.ModelsAduana
 {
     public class PersonaNaturalViewModel
     {
-        public int pena_Id { get; set; }
+        public int? pena_Id { get; set; }
         public int pers_Id { get; set; }
         public string pena_DireccionExacta { get; set; }
         public string Cliente { get; set; }

@@ -18,7 +18,7 @@ public class GoogleCloudStorageService
         _storageClient = StorageClient.Create();
     }
 
-    public async Task<string> SubirArchivoAsync(Stream stream, string filePath, string objectName)
+    public async Task<string> SubirArchivoAsync(string filePath, string objectName)
     {
         using var fileStream = File.OpenRead(filePath);
         await _storageClient.UploadObjectAsync(_bucketName, objectName, null, fileStream);
