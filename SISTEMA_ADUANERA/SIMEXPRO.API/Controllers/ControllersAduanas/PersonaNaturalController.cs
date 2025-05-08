@@ -35,7 +35,7 @@ namespace SIMEXPRO.API.Controllers.ControllersAduanas
         }
 
 
-        [HttpPost("PersonaNatural/Insertar")]
+        [HttpPost("Insertar")]
         public async Task<IActionResult> Insertar([FromForm] PersonaNaturalViewModel model)
         {
             try
