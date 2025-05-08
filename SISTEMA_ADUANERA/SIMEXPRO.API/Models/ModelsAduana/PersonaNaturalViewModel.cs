@@ -35,6 +35,8 @@ namespace SIMEXPRO.API.Models.ModelsAduana
         public string pena_RTN { get; set; }
         public string pena_ArchivoRTN { get; set; }
         public IFormFile ArchivoRTN { get; set; }
+        public IFormFile ArchivoDNI { get; set; }
+        public IFormFile ArchivoNumeroRecibo { get; set; }
 
         public string pena_DNI { get; set; }
         public string pena_ArchivoDNI { get; set; }

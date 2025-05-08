@@ -35,33 +35,52 @@ namespace SIMEXPRO.API.Controllers.ControllersAduanas
         }
 
 
-        [HttpPost("Insertar")]
+       [HttpPost("Insertar")]
         public async Task<IActionResult> Insertar([FromForm] PersonaNaturalViewModel model)
         {
             try
             {
-                // Validar el archivo recibido
+                var storageService = new GoogleCloudStorageService();
+
+                // Procesar ArchivoRTN
                 if (model.ArchivoRTN == null || model.ArchivoRTN.Length == 0)
                 {
-                    return BadRequest("Por favor, sube un archivo válido.");
+                    return BadRequest("Por favor, sube un archivo válido para el RTN.");
                 }
-
-                // Guardar el archivo temporalmente
-                var tempFilePath = Path.GetTempFileName();
-                using (var stream = new FileStream(tempFilePath, FileMode.Create))
+                var tempFilePathRTN = Path.GetTempFileName();
+                using (var stream = new FileStream(tempFilePathRTN, FileMode.Create))
                 {
                     await model.ArchivoRTN.CopyToAsync(stream);
                 }
+                var objectNameRTN = $"{Guid.NewGuid()}_{model.ArchivoRTN.FileName}";
+                var fileUrlRTN = await storageService.SubirArchivoAsync(tempFilePathRTN, objectNameRTN);
+                model.pena_ArchivoRTN = fileUrlRTN;
 
-                // Generar un nombre único para el archivo
-                var objectName = $"{Guid.NewGuid()}_{model.ArchivoRTN.FileName}";
+                // Procesar ArchivoDNI
+                if (model.ArchivoDNI != null && model.ArchivoDNI.Length > 0)
+                {
+                    var tempFilePathDNI = Path.GetTempFileName();
+                    using (var stream = new FileStream(tempFilePathDNI, FileMode.Create))
+                    {
+                        await model.ArchivoDNI.CopyToAsync(stream);
+                    }
+                    var objectNameDNI = $"{Guid.NewGuid()}_{model.ArchivoDNI.FileName}";
+                    var fileUrlDNI = await storageService.SubirArchivoAsync(tempFilePathDNI, objectNameDNI);
+                    model.pena_ArchivoDNI = fileUrlDNI;
+                }
 
-                // Subir el archivo al bucket de Google Cloud Storage
-                var storageService = new GoogleCloudStorageService();
-                var fileUrl = await storageService.SubirArchivoAsync(tempFilePath, objectName);
-
-                // Actualizar el modelo con la URL del archivo
-                model.pena_ArchivoRTN = fileUrl;
+                // Procesar ArchivoNumeroRecibo
+                if (model.ArchivoNumeroRecibo != null && model.ArchivoNumeroRecibo.Length > 0)
+                {
+                    var tempFilePathRecibo = Path.GetTempFileName();
+                    using (var stream = new FileStream(tempFilePathRecibo, FileMode.Create))
+                    {
+                        await model.ArchivoNumeroRecibo.CopyToAsync(stream);
+                    }
+                    var objectNameRecibo = $"{Guid.NewGuid()}_{model.ArchivoNumeroRecibo.FileName}";
+                    var fileUrlRecibo = await storageService.SubirArchivoAsync(tempFilePathRecibo, objectNameRecibo);
+                    model.pena_ArchivoNumeroRecibo = fileUrlRecibo;
+                }
 
                 // Mapear el ViewModel a la entidad
                 var persona = new tbPersonaNatural
@@ -78,8 +97,8 @@ namespace SIMEXPRO.API.Controllers.ControllersAduanas
                     pena_DNI = model.pena_DNI,
                     pena_ArchivoDNI = model.pena_ArchivoDNI,
                     pena_NumeroRecibo = model.pena_NumeroRecibo,
+                    pena_ArchivoNumeroRecibo = model.pena_ArchivoNumeroRecibo,
                     pena_NombreArchRTN = model.pena_NombreArchRTN,
-                    pena_ArchivoNumeroRecibo=model.pena_ArchivoNumeroRecibo,
                     pena_NombreArchRecibo = model.pena_NombreArchRecibo,
                     pena_NombreArchDNI = model.pena_NombreArchDNI,
                     usua_UsuarioCreacion = model.usua_UsuarioCreacion,
@@ -91,33 +110,36 @@ namespace SIMEXPRO.API.Controllers.ControllersAduanas
 
                 if (result.Success)
                 {
-                    var requestStatus = (RequestStatus)result.Data; // Asegura que result.Data sea RequestStatus
+                    var requestStatus = (RequestStatus)result.Data;
 
                     if (requestStatus.Data == null)
                     {
                         return StatusCode(500, "Error: El ID de la persona no fue generado correctamente.");
                     }
 
-                    int personaId = (int)requestStatus.Data; // ✔ Extrae el ID correctamente
+                    int personaId = (int)requestStatus.Data;
 
                     return Ok(new
                     {
                         Message = "Persona insertada exitosamente.",
-                        PersonaId = personaId, // ✔ Ahora está correctamente en el objeto de respuesta
-                        DocumentUrl = fileUrl
+                        PersonaId = personaId,
+                        DocumentUrls = new
+                        {
+                            Message = "Persona insertada exitosamente.",
+                        }
                     });
                 }
                 else
                 {
                     return BadRequest(result.Message);
                 }
-
             }
             catch (Exception ex)
             {
                 return StatusCode(500, $"Error: {ex.Message}");
             }
         }
+
 
 
         [HttpPost("Editar")]
