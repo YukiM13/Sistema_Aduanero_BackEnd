@@ -61,9 +61,9 @@ namespace SIMEXPRO.API.Controllers.ControllersGenerales
 
 
         [HttpGet("FiltrarPorCiudades")]
-        public IActionResult AldeasPorCiudades(int alde_Id)
+        public IActionResult AldeasPorCiudades(int ciud_Id)
         {
-            var listado = _generalesServices.AldeasPorCiudades(alde_Id);
+            var listado = _generalesServices.AldeasPorCiudades(ciud_Id);
             listado.Data = _mapper.Map<IEnumerable<tbAldeas>>(listado.Data);
             return Ok(listado);
         }

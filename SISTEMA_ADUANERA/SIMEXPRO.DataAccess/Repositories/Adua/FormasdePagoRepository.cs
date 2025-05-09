@@ -20,10 +20,10 @@ namespace SIMEXPRO.DataAccess.Repositories.Adua
 
             parameters.Add("@fopa_id", item.fopa_Id, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@usua_UsuarioEliminacion", item.usua_UsuarioEliminacion, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("@fopa_FechaEliminacion", item.fopa_FechaEliminacion, DbType.String, ParameterDirection.Input);
+            parameters.Add("@fopa_FechaEliminacion", item.fopa_FechaEliminacion, DbType.DateTime, ParameterDirection.Input);
 
             var respuesta = db.QueryFirst<string>(ScriptsDataBase.EliminarFormasdePago, parameters, commandType: CommandType.StoredProcedure);
-            
+
             return new RequestStatus()
             {
                 MessageStatus = respuesta
@@ -42,10 +42,10 @@ namespace SIMEXPRO.DataAccess.Repositories.Adua
             var parameters = new DynamicParameters();
             parameters.Add("@fopa_Descripcion", item.fopa_Descripcion, DbType.String, ParameterDirection.Input);
             parameters.Add("@usua_UsuarioCreacion", item.usua_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("@fopa_FechaCreacion", item.fopa_FechaCreacion, DbType.String, ParameterDirection.Input);
+            parameters.Add("@fopa_FechaCreacion", item.fopa_FechaCreacion, DbType.DateTime, ParameterDirection.Input);
 
             var respuesta = db.QueryFirst<string>(ScriptsDataBase.InsertarFormasdePago, parameters, commandType: CommandType.StoredProcedure);
-            
+
             return new RequestStatus()
             {
                 MessageStatus = respuesta
@@ -61,15 +61,15 @@ namespace SIMEXPRO.DataAccess.Repositories.Adua
         public RequestStatus Update(tbFormasdePago item)
         {
             using var db = new SqlConnection(SIMEXPRO.ConnectionString);
-            
+
             var parameters = new DynamicParameters();
             parameters.Add("@fopa_id", item.fopa_Id, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@fopa_Descripcion", item.fopa_Descripcion, DbType.String, ParameterDirection.Input);
             parameters.Add("@usua_UsuarioModificacion", item.usua_UsuarioModificacion, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("@fopa_FechaModificacion", item.fopa_FechaModificacion, DbType.String, ParameterDirection.Input);
+            parameters.Add("@fopa_FechaModificacion", item.fopa_FechaModificacion, DbType.DateTime, ParameterDirection.Input);
 
             var respuesta = db.QueryFirst<string>(ScriptsDataBase.EditarFormasdePago, parameters, commandType: CommandType.StoredProcedure);
-           
+
             return new RequestStatus()
             {
                 MessageStatus = respuesta
