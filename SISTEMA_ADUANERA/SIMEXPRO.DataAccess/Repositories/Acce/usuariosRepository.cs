@@ -146,7 +146,7 @@ namespace SIMEXPRO.DataAccess.Repositories.Acce
             RequestStatus result = new RequestStatus();
             var parametros = new DynamicParameters();
             parametros.Add("@usua_Id", item.usua_Id, DbType.Int32, ParameterDirection.Input);
-            parametros.Add("@usua_Contrasenia", item.usua_Contrasenia, DbType.String, ParameterDirection.Input);
+            parametros.Add("@usua_Nombre", item.usua_Nombre, DbType.String, ParameterDirection.Input);
             //parametros.Add("@usua_Correo", item.usua_Correo, DbType.String, ParameterDirection.Input);
             parametros.Add("@empl_Id", item.empl_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@usua_Image", item.usua_Image, DbType.String, ParameterDirection.Input);
