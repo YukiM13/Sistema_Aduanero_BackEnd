@@ -72,13 +72,16 @@ namespace SIMEXPRO.API.Services
                                     color: #888;
                                     text-align: center;
                                 }}
+                                .img{{
+                                    width: 200px;
+                                }}
                             </style>
                         </head>
                         <body>
                             <div class='container'>
                                 <div class='header'>
-                                    <h2>Frontier Logistic</h2>
-                                    <p>Servicios Aduaneros</p>
+                                    <img class='img' src='https://firebasestorage.googleapis.com/v0/b/fir-upload-pdf-d2c3f.firebasestorage.app/o/logos%2FLOGO.png?alt=media&token=714aa0c5-5772-4f29-a50f-eb9583964ed0' />
+                                    <h2>Servicios Aduaneros</h2>
                                 </div>
                                 <div class='content'>
                                     <p>Estimado/a usuario:</p>
