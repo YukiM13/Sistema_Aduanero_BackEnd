@@ -48,8 +48,8 @@ namespace SIMEXPRO.API.Models.ModelsAduana
         public decimal item_LitrosTotales { get; set; }
 
         public int item_CigarrosTotales { get; set; }
-        public int usua_ioCreacion { get; set; }
-        public string NombrePUsuaraisOrigen { get; set; }
+        public int usua_UsuarioCreacion { get; set; }
+        public string NombrePaisOrigen { get; set; }
         public string usuarioCreacionNombre { get; set; }
         public DateTime item_FechaCreacion { get; set; }
         public int? usua_UsuarioModificacion { get; set; }

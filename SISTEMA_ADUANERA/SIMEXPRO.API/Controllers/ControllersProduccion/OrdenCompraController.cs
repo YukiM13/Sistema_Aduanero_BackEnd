@@ -37,7 +37,7 @@ namespace SIMEXPRO.API.Controllers.ControllersProduccion
         [HttpPost("Insertar")]
         public IActionResult Insert(OrdenCompraViewModel ordenCompraViewModel)
         {
-            var item = _mapper.Map<OrdenCompraViewModel, tbOrdenCompra>(ordenCompraViewModel);
+            var item = _mapper.Map<tbOrdenCompra>(ordenCompraViewModel);
             var respuesta = _produccionServices.InsertarOrdenCompra(item);
             return Ok(respuesta);
         }
