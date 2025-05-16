@@ -10,5 +10,6 @@ namespace SIMEXPRO.DataAccess
     {
         public int CodeStatus { get; set; }
         public string MessageStatus { get; set; }
+        public object Data { get; set; }
     }
 }

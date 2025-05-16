@@ -398,3 +398,4 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+SISTEMA_ADUANERA/SIMEXPRO.API/Keys/credentials.json

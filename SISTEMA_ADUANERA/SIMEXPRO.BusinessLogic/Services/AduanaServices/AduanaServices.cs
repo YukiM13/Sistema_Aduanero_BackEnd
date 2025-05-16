@@ -2977,7 +2977,7 @@ namespace SIMEXPRO.BussinessLogic.Services.EventoServices
             var result = new ServiceResult();
             try
             {
-                var map = _personaNaturalRepository.Insert(item);
+                   var map = _personaNaturalRepository.Insert(item);
                 return result.Ok(map);
             }
             catch (Exception ex)

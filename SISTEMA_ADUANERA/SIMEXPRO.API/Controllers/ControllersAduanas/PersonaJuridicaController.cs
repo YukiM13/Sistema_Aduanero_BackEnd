@@ -36,12 +36,12 @@ namespace SIMEXPRO.API.Controllers.ControllersAduanas
         {
             var mapped = _mapper.Map<tbPersonaJuridica>(personaJuridica);
             var datos = _aduanaServices.InsertarPersonaJuridica(mapped);
-            return Ok(datos);
+            return Ok(datos.Data.MessageStatus);
         }
 
         [HttpPost("InsertarTap2")]
         public IActionResult InsertarTap2(PersonaJuridicaViewModel personaJuridica)
-        {
+            {
             var mapped = _mapper.Map<tbPersonaJuridica>(personaJuridica);
             var datos = _aduanaServices.InsertarPersonaJuridicaTap2(mapped);
             return Ok(datos);

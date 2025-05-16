@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,7 +8,7 @@ namespace SIMEXPRO.API.Models.ModelsAduana
 {
     public class PersonaNaturalViewModel
     {
-        public int pena_Id { get; set; }
+        public int? pena_Id { get; set; }
         public int pers_Id { get; set; }
         public string pena_DireccionExacta { get; set; }
         public string Cliente { get; set; }
@@ -33,6 +34,10 @@ namespace SIMEXPRO.API.Models.ModelsAduana
         public string pena_CorreoAlternativo { get; set; }
         public string pena_RTN { get; set; }
         public string pena_ArchivoRTN { get; set; }
+        public IFormFile ArchivoRTN { get; set; }
+        public IFormFile ArchivoDNI { get; set; }
+        public IFormFile ArchivoNumeroRecibo { get; set; }
+
         public string pena_DNI { get; set; }
         public string pena_ArchivoDNI { get; set; }
         public string pena_NumeroRecibo { get; set; }
