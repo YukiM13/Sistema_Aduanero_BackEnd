@@ -143,12 +143,61 @@ namespace SIMEXPRO.API.Controllers.ControllersAduanas
 
 
         [HttpPost("Editar")]
-        public IActionResult Update(PersonaNaturalViewModel personaNaturalViewModel)
+        public async Task<IActionResult> Update([FromForm] PersonaNaturalViewModel model)
         {
-            var item = _mapper.Map<tbPersonaNatural>(personaNaturalViewModel);
-            var respuesta = _aduanaServices.ActualizarPersonaNatural(item);
-            return Ok(respuesta);
+            try
+            {
+                var storageService = new GoogleCloudStorageService();
+
+                // Procesar ArchivoRTN si se envía
+                if (model.ArchivoRTN != null && model.ArchivoRTN.Length > 0)
+                {
+                    var tempFilePathRTN = Path.GetTempFileName();
+                    using (var stream = new FileStream(tempFilePathRTN, FileMode.Create))
+                    {
+                        await model.ArchivoRTN.CopyToAsync(stream);
+                    }
+                    var objectNameRTN = $"{Guid.NewGuid()}_{model.ArchivoRTN.FileName}";
+                    var fileUrlRTN = await storageService.SubirArchivoAsync(tempFilePathRTN, objectNameRTN);
+                    model.pena_ArchivoRTN = fileUrlRTN;
+                }
+
+                // Procesar ArchivoDNI si se envía
+                if (model.ArchivoDNI != null && model.ArchivoDNI.Length > 0)
+                {
+                    var tempFilePathDNI = Path.GetTempFileName();
+                    using (var stream = new FileStream(tempFilePathDNI, FileMode.Create))
+                    {
+                        await model.ArchivoDNI.CopyToAsync(stream);
+                    }
+                    var objectNameDNI = $"{Guid.NewGuid()}_{model.ArchivoDNI.FileName}";
+                    var fileUrlDNI = await storageService.SubirArchivoAsync(tempFilePathDNI, objectNameDNI);
+                    model.pena_ArchivoDNI = fileUrlDNI;
+                }
+
+                // Procesar ArchivoNumeroRecibo si se envía
+                if (model.ArchivoNumeroRecibo != null && model.ArchivoNumeroRecibo.Length > 0)
+                {
+                    var tempFilePathRecibo = Path.GetTempFileName();
+                    using (var stream = new FileStream(tempFilePathRecibo, FileMode.Create))
+                    {
+                        await model.ArchivoNumeroRecibo.CopyToAsync(stream);
+                    }
+                    var objectNameRecibo = $"{Guid.NewGuid()}_{model.ArchivoNumeroRecibo.FileName}";
+                    var fileUrlRecibo = await storageService.SubirArchivoAsync(tempFilePathRecibo, objectNameRecibo);
+                    model.pena_ArchivoNumeroRecibo = fileUrlRecibo;
+                }
+
+                var item = _mapper.Map<tbPersonaNatural>(model);
+                var respuesta = _aduanaServices.ActualizarPersonaNatural(item);
+                return Ok(respuesta);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error: {ex.Message}");
+            }
         }
+
 
         [HttpPost("Eliminar")]
         public IActionResult Delete(PersonaNaturalViewModel personaNaturalViewModel)

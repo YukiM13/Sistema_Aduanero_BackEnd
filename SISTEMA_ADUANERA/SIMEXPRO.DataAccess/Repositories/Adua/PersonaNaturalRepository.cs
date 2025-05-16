@@ -85,9 +85,10 @@ namespace SIMEXPRO.DataAccess.Repositories.Adua
             parametros.Add("@pena_FechaModificacion", item.pena_FechaModificacion, DbType.DateTime, ParameterDirection.Input);
 
             var answer = db.QueryFirst<string>(ScriptsDataBase.EditarPersonaNatural, parametros, commandType: CommandType.StoredProcedure);
-            result.MessageStatus = answer;  
+            result.MessageStatus = answer;
             return result;
         }
+
         public RequestStatus Finalizar(tbPersonaNatural item)
         {
             RequestStatus result = new();
