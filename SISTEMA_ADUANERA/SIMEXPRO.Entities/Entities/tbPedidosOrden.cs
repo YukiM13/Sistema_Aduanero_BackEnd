@@ -33,7 +33,7 @@ namespace SIMEXPRO.Entities.Entities
         public decimal prod_Precio { get; set; }
 
         public int? duca_Id { get; set; }
-        public decimal? peor_Impuestos { get; set; }
+        public string? peor_Impuestos { get; set; }
         public int ciud_Id { get; set; }
         public string? peor_DireccionExacta { get; set; }
         public DateTime? peor_FechaEntrada { get; set; }

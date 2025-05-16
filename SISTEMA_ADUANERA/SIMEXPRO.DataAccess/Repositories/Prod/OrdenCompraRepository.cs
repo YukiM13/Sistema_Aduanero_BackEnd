@@ -52,8 +52,10 @@ namespace SIMEXPRO.DataAccess.Repositories.Prod
             parametros.Add("@orco_FechaCreacion", item.orco_FechaCreacion, DbType.DateTime, ParameterDirection.Input);
             parametros.Add("@orco_Codigo", item.orco_Codigo, DbType.String, ParameterDirection.Input);
 
-            var answer = db.QueryFirst<string>(ScriptsDataBase.InsertarOrdenCompra, parametros, commandType: CommandType.StoredProcedure);
-            result.MessageStatus = answer;
+            var newId = db.QueryFirst<int>(ScriptsDataBase.InsertarOrdenCompra, parametros, commandType: CommandType.StoredProcedure);
+            result.CodeStatus = newId; 
+            result.MessageStatus = "Orden de compra insertada exitosamente";
+
             return result;
         }
 

@@ -41,8 +41,8 @@ namespace SIMEXPRO.DataAccess.Repositories.Adua
 
             parametros.Add("@fact_Id", item.fact_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@item_Cantidad", item.item_Cantidad, DbType.Int32, ParameterDirection.Input);
-            parametros.Add("@item_PesoNeto", item.item_PesoNeto, DbType.String, ParameterDirection.Input);
-            parametros.Add("@item_PesoBruto", item.item_PesoBruto, DbType.String, ParameterDirection.Input);
+            parametros.Add("@item_PesoNeto", item.item_PesoNeto, DbType.Decimal, ParameterDirection.Input);
+            parametros.Add("@item_PesoBruto", item.item_PesoBruto, DbType.Decimal, ParameterDirection.Input);
             parametros.Add("@unme_Id", item.unme_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@item_IdentificacionComercialMercancias", item.item_IdentificacionComercialMercancias, DbType.String, ParameterDirection.Input);
             parametros.Add("@item_CaracteristicasMercancias", item.item_CaracteristicasMercancias, DbType.String, ParameterDirection.Input);
@@ -62,7 +62,7 @@ namespace SIMEXPRO.DataAccess.Repositories.Adua
             parametros.Add("@item_ReglasAccesorias", item.item_ReglasAccesorias, DbType.String, ParameterDirection.Input);
             parametros.Add("@item_CriterioCertificarOrigen", item.item_CriterioCertificarOrigen, DbType.String, ParameterDirection.Input);
             parametros.Add("@usua_UsuarioCreacion", item.usua_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
-            parametros.Add("@item_FechaCreacion", item.item_FechaCreacion, DbType.String, ParameterDirection.Input);
+            parametros.Add("@item_FechaCreacion", item.item_FechaCreacion, DbType.DateTime, ParameterDirection.Input);
             parametros.Add("@EsNuevo", item.item_EsNuevo, DbType.Boolean, ParameterDirection.Input);
             parametros.Add("@EsHibrido", item.item_EsHibrido, DbType.Boolean, ParameterDirection.Input);
             parametros.Add("@LitrosTotales", item.item_LitrosTotales, DbType.Decimal, ParameterDirection.Input);
@@ -147,8 +147,8 @@ namespace SIMEXPRO.DataAccess.Repositories.Adua
             parametros.Add("@item_Id", item.item_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@fact_Id", item.fact_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@item_Cantidad", item.item_Cantidad, DbType.Int32, ParameterDirection.Input);
-            parametros.Add("@item_PesoNeto", item.item_PesoNeto, DbType.String, ParameterDirection.Input);
-            parametros.Add("@item_PesoBruto", item.item_PesoBruto, DbType.String, ParameterDirection.Input);
+            parametros.Add("@item_PesoNeto", item.item_PesoNeto, DbType.Decimal, ParameterDirection.Input);
+            parametros.Add("@item_PesoBruto", item.item_PesoBruto, DbType.Decimal, ParameterDirection.Input);
             parametros.Add("@unme_Id", item.unme_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@item_IdentificacionComercialMercancias", item.item_IdentificacionComercialMercancias, DbType.String, ParameterDirection.Input);
             parametros.Add("@item_CaracteristicasMercancias", item.item_CaracteristicasMercancias, DbType.String, ParameterDirection.Input);
@@ -168,7 +168,7 @@ namespace SIMEXPRO.DataAccess.Repositories.Adua
             parametros.Add("@item_ReglasAccesorias", item.item_ReglasAccesorias, DbType.String, ParameterDirection.Input);
             parametros.Add("@item_CriterioCertificarOrigen", item.item_CriterioCertificarOrigen, DbType.String, ParameterDirection.Input);
             parametros.Add("@usua_UsuarioModificacion", item.usua_UsuarioModificacion, DbType.Int32, ParameterDirection.Input);
-            parametros.Add("@item_FechaModificacion", item.item_FechaModificacion, DbType.String, ParameterDirection.Input);
+            parametros.Add("@item_FechaModificacion", item.item_FechaModificacion, DbType.DateTime, ParameterDirection.Input);
             parametros.Add("@EsNuevo", item.item_EsNuevo, DbType.Boolean, ParameterDirection.Input);
             parametros.Add("@EsHibrido", item.item_EsHibrido, DbType.Boolean, ParameterDirection.Input);
             parametros.Add("@LitrosTotales", item.item_LitrosTotales, DbType.Decimal, ParameterDirection.Input);

@@ -36,7 +36,7 @@ namespace SIMEXPRO.DataAccess.Repositories.Prod
             using var db = new SqlConnection(SIMEXPRO.ConnectionString);
             RequestStatus result = new RequestStatus();
             var parametros = new DynamicParameters();
-            parametros.Add("@pedi_Id", item.pedi_Id, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@peor_Id", item.peor_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@mate_Id", item.mate_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@prod_Cantidad", item.prod_Cantidad, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@prod_Precio", item.prod_Precio, DbType.Decimal, ParameterDirection.Input);
@@ -48,12 +48,12 @@ namespace SIMEXPRO.DataAccess.Repositories.Prod
             return result;
         }
 
-        public IEnumerable<tbPedidosOrdenDetalle> List(int? pedi_Id)
+        public IEnumerable<tbPedidosOrdenDetalle> List(int? peor_Id)
         {
 
             using var db = new SqlConnection(SIMEXPRO.ConnectionString);
             var parametros = new DynamicParameters();
-            parametros.Add("@pedi_Id", pedi_Id, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@peor_Id", peor_Id, DbType.Int32, ParameterDirection.Input);
 
             var result = db.Query<tbPedidosOrdenDetalle>(ScriptsDataBase.ListarPedidosOrdenDetalles, parametros, commandType: System.Data.CommandType.StoredProcedure);
             return result;
@@ -73,7 +73,7 @@ namespace SIMEXPRO.DataAccess.Repositories.Prod
             RequestStatus result = new RequestStatus();
             var parametros = new DynamicParameters();
             parametros.Add("@prod_Id", item.prod_Id, DbType.Int32, ParameterDirection.Input);
-            parametros.Add("@pedi_Id", item.pedi_Id, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@peor_Id", item.peor_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@mate_Id", item.mate_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@prod_Cantidad", item.prod_Cantidad, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@prod_Precio", item.prod_Precio, DbType.Decimal, ParameterDirection.Input);
@@ -95,7 +95,7 @@ namespace SIMEXPRO.DataAccess.Repositories.Prod
             using var db = new SqlConnection(SIMEXPRO.ConnectionString);
             RequestStatus result = new RequestStatus();
             var parametros = new DynamicParameters();
-            parametros.Add("@peor_Id", item.pedi_Id, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@peor_Id", item.peor_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@mate_Descripcion", item.mate_Descripcion, DbType.String, ParameterDirection.Input);
             parametros.Add("@prod_Cantidad", item.prod_Cantidad, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@prod_Precio", item.prod_Precio, DbType.Decimal, ParameterDirection.Input);

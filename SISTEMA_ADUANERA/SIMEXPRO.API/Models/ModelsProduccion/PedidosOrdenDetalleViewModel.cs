@@ -10,7 +10,7 @@ namespace SIMEXPRO.API.Models.ModelsProduccion
     {
         public int prod_Id { get; set; }
 
-        public int pedi_Id { get; set; }
+        public int peor_Id { get; set; }
         public int mate_Id { get; set; }
         public int prod_Cantidad { get; set; }
         public decimal prod_Precio { get; set; }
@@ -22,7 +22,7 @@ namespace SIMEXPRO.API.Models.ModelsProduccion
         public int usua_UsuarioCreacion { get; set; }
         [NotMapped]
         public string UsuarioCreacionNombre { get; set; }
-        public DateTime prod_FechaCreacion { get; set; }
+        public DateTime prod_FechaCreacion { get; set; } = DateTime.Now;
         public int? usua_UsuarioModificacion { get; set; }
         [NotMapped]
         public string UsuarioModificacionNombre { get; set; }

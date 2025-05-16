@@ -2076,12 +2076,12 @@ namespace SIMEXPRO.BussinessLogic.Services.ProduccionServices
         #endregion
 
         #region Pedidos Orden Detalles
-        public ServiceResult ListarPedidosOrdenDetalle(int pedi_Id)
+        public ServiceResult ListarPedidosOrdenDetalle(int peor_Id)
         {
             var result = new ServiceResult();
             try
             {
-                var list = _pedidosOrdenDetallesRepository.List(pedi_Id);
+                var list = _pedidosOrdenDetallesRepository.List(peor_Id);
                 return result.Ok(list);
 
             }

@@ -29,12 +29,12 @@ namespace SIMEXPRO.DataAccess.Repositories.Prod
             var parametros = new DynamicParameters();
             parametros.Add("@peor_Codigo", item.peor_Codigo, DbType.String, ParameterDirection.Input);
             parametros.Add("@prov_Id", item.prov_Id, DbType.Int32, ParameterDirection.Input);
-            parametros.Add("@duca_No_Duca", item.duca_No_Duca, DbType.String, ParameterDirection.Input);
+            parametros.Add("@duca_NO_DUca", item.duca_No_Duca, DbType.String, ParameterDirection.Input);
             parametros.Add("@ciud_Id", item.ciud_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@peor_DireccionExacta", item.peor_DireccionExacta, DbType.String, ParameterDirection.Input);
             parametros.Add("@peor_FechaEntrada", item.peor_FechaEntrada, DbType.DateTime, ParameterDirection.Input);
             parametros.Add("@peor_Obsevaciones", item.peor_Obsevaciones, DbType.String, ParameterDirection.Input);
-            parametros.Add("@peor_Impuestos", item.peor_Impuestos, DbType.Decimal, ParameterDirection.Input);
+            parametros.Add("@peor_Impuestos", item.peor_Impuestos, DbType.String, ParameterDirection.Input);
             //parametros.Add("@peor_DadoCliente", item.peor_DadoCliente, DbType.Boolean, ParameterDirection.Input);
             //parametros.Add("@peor_Est", item.peor_Est, DbType.Boolean, ParameterDirection.Input);
             parametros.Add("@usua_UsuarioCreacion", item.usua_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);

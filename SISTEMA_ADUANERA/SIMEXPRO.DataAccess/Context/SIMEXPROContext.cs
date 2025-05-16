@@ -4586,7 +4586,7 @@ namespace SIMEXPRO.DataAccess.Context
 
                 entity.HasOne(d => d.pedi)
                     .WithMany(p => p.tbPedidosOrdenDetalle)
-                    .HasForeignKey(d => d.pedi_Id)
+                    .HasForeignKey(d => d.peor_Id)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Prod_tbPedidosOrdenDetalle_pedi_Id_Pro_tbPedidos");
 

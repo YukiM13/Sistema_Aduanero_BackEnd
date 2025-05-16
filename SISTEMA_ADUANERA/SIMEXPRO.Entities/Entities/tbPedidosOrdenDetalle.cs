@@ -16,7 +16,7 @@ namespace SIMEXPRO.Entities.Entities
         }
 
         public int prod_Id { get; set; }
-        public int pedi_Id { get; set; }
+        public int peor_Id { get; set; }
 
         public int mate_Id { get; set; }
         [NotMapped]
