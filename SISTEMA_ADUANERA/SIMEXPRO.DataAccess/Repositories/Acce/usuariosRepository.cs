@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -35,11 +36,36 @@ namespace SIMEXPRO.DataAccess.Repositories.Acce
 
             parametros.Add("@usua_Nombre", usua_Nombre, DbType.String, ParameterDirection.Input);
 
-            var respuesta = db.QueryFirst<string>(ScriptsDataBase.CorreoSegunUsuario, parametros, commandType: CommandType.StoredProcedure);
+            var respuestadb = db.QueryFirst<string>(ScriptsDataBase.CorreoSegunUsuario, parametros, commandType: CommandType.StoredProcedure);
+
+            var codigo = GenerarCodigo();
+
+            var respuesta = respuestadb + ' ' + codigo;
 
             result.MessageStatus = respuesta;
 
             return result;
+        }
+
+        private const string CaracteresPermitidos = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+        public static string GenerarCodigo(int longitud = 6)
+        {
+            var resultado = new StringBuilder();
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                var buffer = new byte[sizeof(uint)];
+
+                for (int i = 0; i < longitud; i++)
+                {
+                    rng.GetBytes(buffer);
+                    uint numero = BitConverter.ToUInt32(buffer, 0);
+                    var index = numero % (uint)CaracteresPermitidos.Length;
+                    resultado.Append(CaracteresPermitidos[(int)index]);
+                }
+            }
+
+            return resultado.ToString();
         }
 
         public RequestStatus CambiarContrasenia(tbUsuarios item)
@@ -120,7 +146,7 @@ namespace SIMEXPRO.DataAccess.Repositories.Acce
             RequestStatus result = new RequestStatus();
             var parametros = new DynamicParameters();
             parametros.Add("@usua_Id", item.usua_Id, DbType.Int32, ParameterDirection.Input);
-            parametros.Add("@usua_Contrasenia", item.usua_Contrasenia, DbType.String, ParameterDirection.Input);
+            parametros.Add("@usua_Nombre", item.usua_Nombre, DbType.String, ParameterDirection.Input);
             //parametros.Add("@usua_Correo", item.usua_Correo, DbType.String, ParameterDirection.Input);
             parametros.Add("@empl_Id", item.empl_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@usua_Image", item.usua_Image, DbType.String, ParameterDirection.Input);
